@@ -117,12 +117,12 @@ echo
 echo "Foodcritc Lint checks"
 echo
 
-echo $(which foodcritic)
+echo Using: $(which foodcritic)
 foodcritic . -f any --tags ~FC015 --tags ~FC003 --tags ~FC023 --tags ~FC041 --tags ~FC034 -X spec
 FC_EXIT_CODE=$?
 
 if [ "$FC_EXIT_CODE" != "0" ]; then
-    echo "Lint errors found"
+    echo "Foodcritic errors found"
     EXIT_CODE=1
 else
    echo "Foodcritic tests successful"
