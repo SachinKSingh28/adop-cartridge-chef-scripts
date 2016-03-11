@@ -10,7 +10,7 @@ echo "Running chefspec unit tests."
 echo
 
 
-f [ -n "$1" ]
+if [ -n "$1" ]
 then
   if [ -d "$1" ]; then
     cd $1
