@@ -132,32 +132,32 @@ echo
 echo "#######################"
 echo
 
-echo
-echo "#######################"
-echo
-echo "Checking for local cookbook depencies..."
-echo "-> Dependencies should be from external GIT repositories accessible by Jenkins."
-echo
-
-DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-ruby ${DIR}/chef_berksfile_test.rb
-BERKS_EXIT_CODE=$?
-
-if [ "$BERKS_EXIT_CODE" != "0" ]; then
-  echo
-  echo "->"
-  echo "-> Berksfile local path cookbook dependencies found - please ensure all dependencies are from GIT!"
-  echo "->"
-  EXIT_CODE=1
-else
-  echo
-  echo "Berksfile dependencies OK."
-fi
-
-echo
-echo "#######################"
-echo
-
+#echo
+#echo "#######################"
+#echo
+#echo "Checking for local cookbook depencies..."
+#echo "-> Dependencies should be from external GIT repositories accessible by Jenkins."
+#echo
+#
+#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+#ruby ${DIR}/chef_berksfile_test.rb
+#BERKS_EXIT_CODE=$?
+#
+#if [ "$BERKS_EXIT_CODE" != "0" ]; then
+#  echo
+#  echo "->"
+#  echo "-> Berksfile local path cookbook dependencies found - please ensure all dependencies are from GIT!"
+#  echo "->"
+#  EXIT_CODE=1
+#else
+#  echo
+#  echo "Berksfile dependencies OK."
+#fi
+#
+#echo
+#echo "#######################"
+#echo
+#
 
 #echo
 #echo "#######################"
