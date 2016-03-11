@@ -6,6 +6,17 @@
 #
 ###
 
+if [ -n "$1" ]
+then
+  if [ -d "$1" ]; then
+    cd $1
+    pwd
+  else
+    echo Usage: $0 '<directory to run in>(optional)'
+    exit 1
+  fi
+fi
+
 COOKBOOK_NAME=$(grep "name.*" metadata.rb | sort -r | head -n -1)
 COOKBOOK_VERSION=$(grep version metadata.rb | head -n 1)
 
