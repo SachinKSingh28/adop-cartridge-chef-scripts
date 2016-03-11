@@ -87,7 +87,7 @@ echo "Ruby JSON Syntax checks"
 echo
 
 
-echo $(which jsonlint)
+echo $(which jq)
 # Files to check
 FILES=$(find . -name "*.json")
 JSON_SYNTAX_EXIT=0
@@ -95,7 +95,7 @@ JSON_SYNTAX_EXIT=0
 for FILE in $FILES
 do
   echo "Checking ${FILE}"
-  jsonlint $FILE
+  jq . $FILE
   JSON_SYNTAX_EXIT=$(($JSON_SYNTAX_EXIT + $?))
 done
 
@@ -117,7 +117,7 @@ echo
 echo "Foodcritc Lint checks"
 echo
 
-command -v foodcritic || alias foodcritic='docker run --rm -v $(pwd):/cookbook/ spheromak/docker-chefdk foodcritic'
+echo $(which foodcritic)
 foodcritic . -f any --tags ~FC015 --tags ~FC003 --tags ~FC023 --tags ~FC041 --tags ~FC034 -X spec
 FC_EXIT_CODE=$?
 
