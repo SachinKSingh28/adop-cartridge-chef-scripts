@@ -9,6 +9,19 @@ echo
 echo "Running chefspec unit tests."
 echo
 
+
+f [ -n "$1" ]
+then
+  if [ -d "$1" ]; then
+    cd $1
+    pwd
+  else
+    echo Usage: $0 '<directory to run in>(optional)'
+    exit 1
+  fi
+fi
+
+
 rspec --format documentation spec
 
 EXIT_CODE=$?
