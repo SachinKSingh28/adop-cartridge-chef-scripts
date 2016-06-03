@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 ###
 #
@@ -28,7 +28,7 @@ EXIT_CODE=0
 echo
 echo "Testing Cookbook:"
 echo "${COOKBOOK_NAME}"
-echo "${COOKBOOK_VERSION}" 
+echo "${COOKBOOK_VERSION}"
 echo
 echo "#######################"
 echo
@@ -114,74 +114,25 @@ echo
 echo
 echo "#######################"
 echo
-echo "Foodcritc Lint checks"
+echo "Checking for local cookbook depencies..."
+echo "-> Dependencies should be from external GIT repositories accessible by Jenkins."
 echo
 
-echo Using: $(which foodcritic)
-foodcritic . -f any --tags ~FC015 --tags ~FC003 --tags ~FC023 --tags ~FC041 --tags ~FC034 -X spec
-FC_EXIT_CODE=$?
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+ruby ${DIR}/chef_berksfile_test.rb
+BERKS_EXIT_CODE=$?
 
-if [ "$FC_EXIT_CODE" != "0" ]; then
-    echo "Foodcritic errors found"
-    EXIT_CODE=1
+if [ "$BERKS_EXIT_CODE" != "0" ]; then
+ echo
+ echo "->"
+ echo "-> Berksfile local path cookbook dependencies found - please ensure all dependencies are from GIT!"
+ echo "->"
+ EXIT_CODE=1
 else
-   echo "Foodcritic tests successful"
+ echo
+ echo "Berksfile dependencies OK."
 fi
 
-echo
-echo "#######################"
-echo
-
-#echo
-#echo "#######################"
-#echo
-#echo "Checking for local cookbook depencies..."
-#echo "-> Dependencies should be from external GIT repositories accessible by Jenkins."
-#echo
-#
-#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-#ruby ${DIR}/chef_berksfile_test.rb
-#BERKS_EXIT_CODE=$?
-#
-#if [ "$BERKS_EXIT_CODE" != "0" ]; then
-#  echo
-#  echo "->"
-#  echo "-> Berksfile local path cookbook dependencies found - please ensure all dependencies are from GIT!"
-#  echo "->"
-#  EXIT_CODE=1
-#else
-#  echo
-#  echo "Berksfile dependencies OK."
-#fi
-#
-#echo
-#echo "#######################"
-#echo
-#
-
-#echo
-#echo "#######################"
-#echo
-#echo "Checking whether this cookbook version is already on the Chef Server..."
-#echo "-> Later version should be used in metadata, so that the cookbook is uploaded."
-#echo
-#
-#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-#ruby ${DIR}/chef_version_test.rb
-#VERSION_EXIT_CODE=$?
-#
-#if [ "$VERSION_EXIT_CODE" != "0" ]; then
-#  echo
-#  echo "->"
-#  echo "-> Version is already on Chef Server, please bump the version following SemVer 2.0.0 rules."
-#  echo "-> Usualy patch number is bumped."
-#  echo "->"
-#  EXIT_CODE=1
-#else
-#  echo
-#  echo "Cookbook Version OK."
-#fi
-#
 echo
 echo "#######################"
 echo
