@@ -1,0 +1,10 @@
+{
+  "chef":{
+    "chef_server_url":"https://<changemeonrealservervalue>.com",
+    "client_key":"./.chef/admin.pem",
+    "node_name":"admin"
+  },
+  "ssl":{
+    "verify":false
+  }
+}
