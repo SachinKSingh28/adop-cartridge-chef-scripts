@@ -39,14 +39,9 @@ grep -rl $'\r' * | egrep -v $IGNORE | tee $LOG
 
 if [ -s $LOG ]
 then
-  echo "CrLf, windows line endings found!"
-  echo "Converting Windows files to unix"
-
-  cat dosfiles.txt | while read LINE
-  do
-  	dos2unix ${LINE}
-
-  done
+  echo "ERROR: CrLf, windows line endings found!"
+  echo "List of files with windows line endings - \n$(cat dosfiles.txt)"
+  EXIT_CODE=1
 else
   echo "No Windows files found!"
 fi
